@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Div as Image</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <button onclick="captureDiv()">Capture and Download Image</button>
+    <div id="result">
+        <p>Captured Image:</p>
+        <a id="downloadLink" href="#" download="captured-image.png">
+            <img id="capturedImage" src="" alt="Captured Image">
+        </a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script >
+        function captureDiv() {
+    html2canvas(document.getElementById('captureArea'), {
+        scale: 2, // Increase scale for better quality
+    }).then(function(canvas) {
+        // Create an image element and set its source to the captured canvas
+        var img = document.getElementById('capturedImage');
+        img.src = canvas.toDataURL('image/png');
+
+        // Create a download link and set its href to the image data URL
+        var downloadLink = document.getElementById('downloadLink');
+        downloadLink.href = canvas.toDataURL('image/png');
+        
+        // Automatically trigger the download
+        downloadLink.click();
+    });
+}
+
+    </script>
+</body>
+</html>

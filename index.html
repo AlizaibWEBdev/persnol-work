@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Title & Description Generator</title>
+
+</head>
+
+<style>
+    /* Basic reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+        background-color: #f0f2f5;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    /* Container styling */
+    .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 700px;
+        text-align: center;
+
+    }
+
+    /* Heading styling */
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #007bff;
+    }
+
+    /* Input styling */
+    input[type="text"] {
+        padding: 12px 20px;
+        width: 80%;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    /* Button styling */
+    .btn {
+        padding: 12px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+
+
+
+
+    .output {
+        margin-top: 20px;
+    }
+
+    /* Output section styling */
+    .output-section {
+        margin-bottom: 30px;
+    }
+
+    /* Output content styling */
+    .output-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Generated text styling */
+    .generated-text {
+        background-color: #f9f9f9;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-right: 10px;
+        font-size: 16px;
+        word-wrap: break-word;
+        text-align: left;
+        width: 100%;
+    }
+
+    /* Copy button styling */
+    .copy-btn {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Copy button hover effect */
+    .copy-btn:hover {
+        background-color: #218838;
+    }
+
+    #backgroundDiv {
+        width: 640px;
+        height: 700px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    #captureArea {
+        width: 1280px;
+        height: 720px;
+        background-color: rgb(20, 21, 22);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .promo-content {
+        padding: 50px;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 500px;
+    }
+
+    .flex p {
+        font-size: 50px;
+        text-align: center;
+        font-weight: 500;
+        color: white;
+    }
+
+    #captureArea {
+        position: relative;
+        border:10px solid #b8c200;
+     
+    }
+
+    .title {
+        position: absolute;
+        bottom: 0px;
+        width: 550px;
+
+        height: 460px;
+
+    }
+
+    .title h1 {
+        font-size: 35px;
+        color: white;
+
+        font-weight: 900;
+        text-shadow: 2px 2px 0px rgba(255, 0, 0, 0.272);
+    }
+
+    .title button {
+        padding: 20px;
+        font-size: 30px;
+        color: white;
+        font-weight: 800;
+        background-color: red;
+        border-radius: 40px;
+        border: none;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Movie Title & Description Generator</h1>
+        <form action="" method="get" >
+            <div>
+                <input type="text" id="movieInput" placeholder="Enter movie name" required>
+
+                <input type="file" id="fileInput" required />
+            </div>
+            <button class="btn">Generate</button>
+
+
+        </form>
+
+        <div class="output">
+            <div class="output-section">
+                <h2>Generated Title:</h2>
+                <div class="output-content">
+                    <p id="generatedTitle" class="generated-text"></p>
+                    <button class="copy-btn" onclick="copyToClipboard('generatedTitle')">Copy</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2>Generated Description:</h2>
+                <div class="output-content">
+                    <p id="generatedDescription" class="generated-text"></p>
+                    <button class="copy-btn" onclick="copyToClipboard('generatedDescription')">Copy</button>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div id="captureArea">
+        <div class="promo-content">
+            <div class="flex">
+                <img width="130px" src="2416659.webp" alt="">
+                <img width="130px"
+                    src="png-transparent-download-now-download-icon-download-button-download-logo-flat-icon-flat-logo-flat-image-button-flat-round-thumbnail-removebg-preview.png"
+                    alt="">
+                <p>हिंदी में उपलब्ध है</p>
+            </div>
+
+            <div class="title">
+                <h1 id="title-main">Download & Watch Online kill For Free Google Drive Link Available HD Quality</h1>
+                <button>Download &downarrow; </button>
+                <br>
+                <br>
+                <button style="border-radius: 0px;padding: 10px;transform: translateX(30px);color: black; background-color:rgb(255, 255, 0);">#Free!! </button>
+            </div>
+        </div>
+        <div id="backgroundDiv"></div>
+    </div>
+    <button onclick="captureDiv()" class="btn">
+        Downlaod thumbnail
+    </button>
+    <a href="" id="downloadLink"></a>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+      function captureDiv() {
+    html2canvas(document.getElementById('captureArea'), {
+        scale: 2, // Increase scale for better quality
+    }).then(function (canvas) {
+        // Create a Blob from the canvas image data
+        canvas.toBlob(function (blob) {
+            // Create a download link and set its href to the Blob URL
+            var downloadLink = document.getElementById('downloadLink');
+            var url = URL.createObjectURL(blob);
+            downloadLink.href = url;
+            downloadLink.download = 'thumbnail.png'; // Set the file name for download
+
+            // Programmatically click the download link
+            downloadLink.click();
+
+            // Revoke the object URL after a short delay
+            setTimeout(function () {
+                URL.revokeObjectURL(url);
+            }, 100);
+        });
+    });
+}
+
+        let urlbg;
+        document.getElementsByTagName("form")[0].addEventListener("submit",(e)=>{
+        e.preventDefault()
+        generateContent();
+        })
+        function generateContent() {
+        
+            const movieName = document.getElementById("movieInput").value.trim();
+            const titleElement = document.getElementById("generatedTitle");
+            const descriptionElement = document.getElementById("generatedDescription");
+            document.getElementById("title-main").innerText = `Download & Watch Online ${movieName} For Free || Google Drive Link Available || HD Quality`.replaceAll("||","")
+            document.getElementById('backgroundDiv').style.backgroundImage = `url(${urlbg})`;
+            if (movieName) {
+                // Generate the title
+                const title = `Download & Watch Online ${movieName} For Free || Google Drive Link Available || HD Quality`;
+                titleElement.textContent = title;
+
+                // Generate the description
+                const description = `
+        In this video, you can easily download ${movieName} in Full HD using the Google Drive link provided below. Watch the latest episodes or movie in high quality, directly from Google Drive.
+        
+🎬 Download Link:
+[Google Drive Link Here]
+        
+🔥 What’s Inside:
+Full HD Quality: Enjoy ${movieName} in stunning 1080p.
+Fast Download: Quick and secure download via Google Drive.
+No Ads, No Interruptions: Pure viewing experience without any distractions.
+        
+⚠️ Disclaimer:
+This video is for educational and informational purposes only. We do not host or store any files on our servers. The link provided is publicly available on Google Drive, and we are not responsible for any copyright issues.
+        
+💬 Let Us Know:
+If you have any issues with the download or want to request another ${movieName}, feel free to leave a comment below!
+        `;
+                descriptionElement.textContent = description;
+            } else {
+                titleElement.textContent = "Please enter a movie name.";
+                descriptionElement.textContent = "";
+            }
+        }
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied to clipboard!");
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        }
+        document.getElementById('fileInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    urlbg = e.target.result;
+
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+    </script>
+</body>
+
+</html>
